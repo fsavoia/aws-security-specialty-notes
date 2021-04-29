@@ -50,4 +50,4 @@ Pen Test in AWS
 - Antigamente era necessário abrir um chamado na AWS para fazer PenTest, mas recentemente isso mudou e agora é possível fazer o teste diretamente contra sua infra, em até 8 serviços (pré-aprovados)
 - ec2, rds, cloudfront, autora, apigw, lambda, lambda edge, beanstalk
 - Alguns testes são proibidos: Dos, DDoS, Port Flooding, DNS zone walking, etc
-
+- instancias pequenas não são suportadas;
