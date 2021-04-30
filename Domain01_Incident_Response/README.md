@@ -20,29 +20,29 @@ Incident Response
 - É uma forma estuturada para identificar e gerenciar as ações necessários pós-ocorrido de um incidente de segurança dentro da sua organização, limitando os danos causados, reduzindo tempo de recuperação e os custos causados pelo incidente;
 
 - AWS Access Key e Secret Key expostas:
-1 - valida quais acessos a Key exposta possui;
-2 - invalida a credencial;
-3 - invalida qualquer acesso temporário (STS), incluindo uma policy Explicity Denied;
-4 - cria uma nova credencial e migra;
-5 - valida seu conta (cloudtrail, recursos, etc), para identificar se algo pode ter acontecido.
+1. valida quais acessos a Key exposta possui;
+2. invalida a credencial;
+3. invalida qualquer acesso temporário (STS), incluindo uma policy Explicity Denied;
+4. cria uma nova credencial e migra;
+5. valida seu conta (cloudtrail, recursos, etc), para identificar se algo pode ter acontecido.
 
 - EC2 comprometido:
-1 - isola a instância, só permite acesso se for para análise forense ou algo do tipo;
-2 - tira um snapshot do EBS;
-3 - tira um dump de memória para análise forese poterior (caso o ofensor esteja rodando em memória);
-4 - análise forense / causa raíz;
-5 - termina a instância.
+1. isola a instância, só permite acesso se for para análise forense ou algo do tipo;
+2. tira um snapshot do EBS;
+3. tira um dump de memória para análise forese poterior (caso o ofensor esteja rodando em memória);
+4. análise forense / causa raíz;
+5. termina a instância.
 
 Incident Response Plan
 -----------------------
 
 - Quando um incidente ocorre, é importante você já ter um plano preparado para seguir. Algumas etapas:
-1 - Preparação (logs habilitados, uso do Organizations para segmentação de contas, etc)
-2 - Detecção (monitora a infra para detectar os comportamento maliciosos, como tentativas de logins com falha em X tempo)
-3 - Conter (por exemplo, use uma automação que inclui um SG restritivo numa EC2)
-4 - Investiga (investiga causa raíz)
-5 - Recupera (restaura ambiente)
-6 - Lições aprendidas (o que fazer para evitar?!)
+1. Preparação (logs habilitados, uso do Organizations para segmentação de contas, etc)
+2. Detecção (monitora a infra para detectar os comportamento maliciosos, como tentativas de logins com falha em X tempo)
+3. Conter (por exemplo, use uma automação que inclui um SG restritivo numa EC2)
+4. Investiga (investiga causa raíz)
+5. Recupera (restaura ambiente)
+6. Lições aprendidas (o que fazer para evitar?!)
 
 Pen Test in AWS
 ----------------

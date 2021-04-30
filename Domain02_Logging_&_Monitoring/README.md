@@ -38,7 +38,9 @@ SSM
 
 - suporte ec2, on-premises e VMs
 - necessário agente no EC2 (exceto Amazon Linux AMI) / role para o SSM / saída para os endpoints do SSM via 443
-- Sessions Manager
+- Session Manager
 1. Centraliza acesso dos ec2;
 2. Audita os acessos (logs das sessões podem ser exportados para um Bucket/cloudwatch com todo histórico de comandos (inclusive os outputs), qual usuário iam, etc;
 3. Sem necessidade de portas abertas nos SG.
+- Run Command: permite rodar comandos remotos nos ec2, usando templates
+- Patch Manager: permite gerenciar os patches dos ec2, usando baselines já prontos ou criados, onde vc define janela de manutenção, janela de reboot se necessário, export dos logs da aplicação, se vc quer fazer só um scan ou scan e aplicar, entre outras opções, como a possibilidade de usar hooks durante a aplicação do patch (antes/depois por exemplo), uso de grupos/tags, etc;
