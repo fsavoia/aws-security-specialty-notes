@@ -12,7 +12,7 @@ AWS Inspector
 - findings, onde estão as análises via console
 
 Security Hub
---------------
+-------------- 
 
 - Centraliza os alertas de segurança de vários serviços de segurança da AWS (guard duty / inspector / Macie )
 - Também tem sua própria análise seguindo alguns padrões (CIS AWS Foundations / PCI DSS); necessário AWS Config
@@ -32,3 +32,9 @@ WAF
 2 - support association: alb, cloudfront, api gateway;
 - 1500 WCU no total disponíveis;
 - Cada rule tem uma prioridade e se a requisição bater, nenhuma outra rule será inspecionada
+
+SSM
+----
+
+- suporte ec2, on-premises e VMs
+- necessário agente no EC2 (exceto Amazon Linux AMI) / role para o SSM / saída para os endpoints do SSM via 443
