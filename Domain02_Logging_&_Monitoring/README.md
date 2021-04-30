@@ -39,6 +39,6 @@ SSM
 - suporte ec2, on-premises e VMs
 - necessário agente no EC2 (exceto Amazon Linux AMI) / role para o SSM / saída para os endpoints do SSM via 443
 - Sessions Manager
-* Centraliza acesso dos ec2
-* Audita os acessos (logs das sessões podem ser exportados para um Bucket/cloudwatch com todo histórico de comandos (inclusive os outputs), qual usuário iam, etc
-* Sem necessidade de portas abertas nos SG
++ Centraliza acesso dos ec2
++ Audita os acessos (logs das sessões podem ser exportados para um Bucket/cloudwatch com todo histórico de comandos (inclusive os outputs), qual usuário iam, etc
++ Sem necessidade de portas abertas nos SG
