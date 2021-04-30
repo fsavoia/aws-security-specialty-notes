@@ -25,13 +25,13 @@ WAF
 - Web ACL é o conjunto geral dos rules, rules statements e associations;
 - Rule Statements: onde vc define qual regra vc quer que seja analisado durante uma requisição (ex: bloqueio acessos vindos da ìndia ; bloqueai acesso a url /admin); admite regras customizadas, bem como padrões da AWS
 - Rules (regras de ações baseadas nos statements), podem ser de 2 tipos: 
-1 - regular: pode combinar vários Rule Statements e criar regras do tipo AND, OR, NOT; ex: se o request tiver um código SQL e tiver IP de origem x.x.x.x;
-2 - rate-based: regular rule + rate limiting, exemplo: se a requisição vier do IP 172.x.x.x e se a requisição exceder 1000 requests em 10 minutos;
+1. regular: pode combinar vários Rule Statements e criar regras do tipo AND, OR, NOT; ex: se o request tiver um código SQL e tiver IP de origem x.x.x.x;
+2.  rate-based: regular rule + rate limiting, exemplo: se a requisição vier do IP 172.x.x.x e se a requisição exceder 1000 requests em 10 minutos;
 - Association:
-1 - não possível de ser atachado diretamente em uma ec2;
-2 - support association: alb, cloudfront, api gateway;
-- 1500 WCU no total disponíveis;
-- Cada rule tem uma prioridade e se a requisição bater, nenhuma outra rule será inspecionada
+1. não possível de ser atachado diretamente em uma ec2;
+2. support association: alb, cloudfront, api gateway;
+3. 1500 WCU no total disponíveis;
+4. Cada rule tem uma prioridade e se a requisição bater, nenhuma outra rule será inspecionada
 
 SSM
 ----
@@ -39,6 +39,6 @@ SSM
 - suporte ec2, on-premises e VMs
 - necessário agente no EC2 (exceto Amazon Linux AMI) / role para o SSM / saída para os endpoints do SSM via 443
 - Sessions Manager
-+ Centraliza acesso dos ec2
-+ Audita os acessos (logs das sessões podem ser exportados para um Bucket/cloudwatch com todo histórico de comandos (inclusive os outputs), qual usuário iam, etc
-+ Sem necessidade de portas abertas nos SG
+1. Centraliza acesso dos ec2;
+2. Audita os acessos (logs das sessões podem ser exportados para um Bucket/cloudwatch com todo histórico de comandos (inclusive os outputs), qual usuário iam, etc;
+3. Sem necessidade de portas abertas nos SG.
