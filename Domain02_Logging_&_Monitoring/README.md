@@ -44,3 +44,35 @@ SSM
 3. Sem necessidade de portas abertas nos SG.
 - Run Command: permite rodar comandos remotos nos ec2, usando templates
 - Patch Manager: permite gerenciar os patches dos ec2, usando baselines já prontos ou criados, onde vc define janela de manutenção, janela de reboot se necessário, export dos logs da aplicação, se vc quer fazer só um scan ou scan e aplicar, entre outras opções, como a possibilidade de usar hooks durante a aplicação do patch (antes/depois por exemplo), uso de grupos/tags, etc;
+- Parameter Store: permite armazenar senhas e configurações (chave-valor), como database strings, senhas, etc; possível criptografar usando KMS. Ex via linha de comando: aws ssm get-parameter --name parameter, se for criptografado vc pode usar com a opção --with-decryption.
+
+Athena
+-------
+
+- analisa log files do S3 usando SQL;
+- exemplo de caso 1: análise de logs de auditoria no S3 que foram a partir de um cloudtrail
+- exemplo de caso 2: um pico de tráfego na sua rede e vc quer analisar se o tráfego é válido ou um possível ataque; usa o Athen para analisar o VPC Flow Log enviado para o S3 para verificar o número e quais IPs foram rejeitados, qual ENI recebeu maior quantidade de tráfego, etc.
+
+CloudTrail
+------------
+
+- monitora todas as chamadas de API feitas na conta, usado para auditoria (ex.: quem, quando, de onde foi deletado o bucket XXXX);
+- possível criar trails (um é de graça), onde vc joga os logs para o S3, possível habilitar para todas as contas de um Organizations;
+- possui integração com cloudwatch para monitorar os trails e notificar quando algo acontece;
+- no Event history só é possível visualizar os últimos 90 dias de logs, mais do que isso é necessário criar um trail e jogar para o S3.
+
+AWS Config
+------------
+
+- utilizado para monitorar alterações nas configurações dos recursos com o tempo. ex.: uma ec2 que rodava um site nos últimos 90 dias começou a dar vários problemas. O que foi que houve? o que foi alterado?
+- usado também para audit e compliance, pois vc consegue criar as Rules que monitora os recursos e alerta os Findings que estão compliances/não compliances. Ex.: cria uma rule que diz que uma determinada ami está pré-aprovada para isso e ele monitora ec2 que foram lançadas sem essa AMI;
+- rules podem ser gerenciadas pela AWS (aws managed ou criada customizada);
+- conformance pack: basicamente uma coleção de AWS Config Rules e remediações que podem ser configuradas. ex: ao invés de selecionar uma rule específica sobre S3, eu posso escolher um pack com as best practices incluindo todas as rules do S3;
+- por muitas vezes uma rule (aws managed) vem de um conformance pack.
+
+Trusted Advisor
+----------------
+
+- best practices da AWS evolvendo os principais pilares: cost optimization, performance, security, fault tolerance e service limits;
+- para liberar todas as features do trusted advisor, precisa ter um plano de suporte business ou enterprise, caso contrário fica limitado somente algumas features de segurança e service limits;
+- exemplos de best practices: idle load balancers, EIP sem associação (cost optimization); segurança (access key sem rotação por no mínimo 90 dias e etc)
