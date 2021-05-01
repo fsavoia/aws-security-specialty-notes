@@ -62,8 +62,10 @@ CloudTrail
 - no Event history só é possível visualizar os últimos 90 dias de logs, mais do que isso é necessário criar um trail e jogar para o S3.
 - Log file integrity: usado para garantir a intgridade dos logs do trail, evitando assim que alguém manipule o arquivo de log. Ele faz isso usando hash e assinatura digital:
 
-aws cloudtrail describe-trails // pesquisar todas os trails
-aws cloudtrail validate-logs --trail-arn [ARN-HERE] --start-time 20190101T19:00:00Z // validar integridade do trail
+```console
+$ aws cloudtrail describe-trails // pesquisar todas os trails
+$ aws cloudtrail validate-logs --trail-arn [ARN-HERE] --start-time 20190101T19:00:00Z // validar integridade do trail
+```
 
 AWS Config
 ------------
