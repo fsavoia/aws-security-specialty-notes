@@ -82,3 +82,32 @@ Trusted Advisor
 - best practices da AWS evolvendo os principais pilares: cost optimization, performance, security, fault tolerance e service limits;
 - para liberar todas as features do trusted advisor, precisa ter um plano de suporte business ou enterprise, caso contrário fica limitado somente algumas features de segurança e service limits;
 - exemplos de best practices: idle load balancers, EIP sem associação (cost optimization); segurança (access key sem rotação por no mínimo 90 dias e etc)
+
+AWS Macie
+----------
+
+- Macie usa sistema de machine Learning para analisar dados dentro de bucket s3 a fim de proteger contra vazamento de dados, informações sensíveis e demais informações críticas de segurança. Ele se baseia em alguns padrões, como o PII para buscar por exemplo informações críticas bancárias/cartões. Acesso keys colocadas indevidamente, entre outros. Pode ser customizado se necessário e integrado com sistemas de eventos para remediar alguma coisa específica.
+
+VPC Flow Logs
+---------------
+
+- Formato do log
+
+```console
+2 123456789010 eni-1235b8ca123456789 172.31.16.139 172.31.16.21 20641 22 6 20 4249 1418530010 1418530070 ACCEPT OK
+```
+
+1. version (flow logs version)
+2. account-id
+3. eni id
+4. source
+5. destiny
+6. source port
+7. dest port
+8. protocol number (6 é tcp por exemplo)
+9. pacotes transferidos
+10. bytes transferidos
+11. start time in unix seconds
+12. end time in unix seconds
+13. ação (accept / reject)
+14. log status do flow log
