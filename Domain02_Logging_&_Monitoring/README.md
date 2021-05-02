@@ -75,6 +75,8 @@ AWS Config
 - rules podem ser gerenciadas pela AWS (aws managed ou criada customizada);
 - conformance pack: basicamente uma coleção de AWS Config Rules e remediações que podem ser configuradas. ex: ao invés de selecionar uma rule específica sobre S3, eu posso escolher um pack com as best practices incluindo todas as rules do S3;
 - por muitas vezes uma rule (aws managed) vem de um conformance pack.
+- para habilitar que ele monitore todas as regiões, é necessário habilitar global resource check durante a configuração (The global resource types that AWS Config supports are IAM users, groups, roles, and customer managed policie)
+- best practices: https://aws.amazon.com/blogs/mt/aws-config-best-practices/
 
 Trusted Advisor
 ----------------
