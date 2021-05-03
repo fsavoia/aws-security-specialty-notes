@@ -43,3 +43,20 @@ EBS
 1. antes de terminar a instância, manualmente o cliente pode fazer um wipe por conta própria;
 2. AWS automaticamente faz um Wipe dos dados imediatamente antes do EBS ser marcado para reuso;
 - quando o storage/disco atingir o "end of use" eles são decomissionados seguindo alguns documentos de compliance de segurança;
+
+CloudFront
+-----------
+
+- SNI
+1. usado para  habilitar múltiplos certificados/domínios num mesmo servidor
+2. navegadores mais modernos suportam SNI
+3. antigamente, caso fosse necessários vários domínios/certificados no mesmo servidor, era necessário 4. alocar IPs dedicados para cada serviço para funcionamento do SSL (dns->ip->ssl por domínio)
+5. o cloudfront tem uma função bem cara ($600/mês) que habilita IPs dedicados em cada edge location para permitir funcionamento de navegadores legados (isso garante acesso total ao site)
+
+- OAI: usado para permitir acesso na origem somente pelo CloudFront, por exemplo, evitando expor um bucket S3 diretamente pro mundo; necessário habilitar o OAI, incluir uma bucket policy, bloquear acesso público.
+
+- Signed URLs or Signed cookie
+1. possível implementar URLs assinadas diretamente a nível do Cloudfront permitindo acesso a algum objeto somente a pessoas autorizadas
+2. possui um Trusted Signers, outras contas além de vc podem criar URLs assinadas para seus objetos
+3. Os cloudfront key pairs precisam ser gerados via root no IAM (security credentials)
+4. precisa ser habilitado na distribuição.
