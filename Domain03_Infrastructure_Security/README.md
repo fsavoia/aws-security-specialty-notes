@@ -60,3 +60,15 @@ CloudFront
 2. possui um Trusted Signers, outras contas além de vc podem criar URLs assinadas para seus objetos
 3. Os cloudfront key pairs precisam ser gerados via root no IAM (security credentials)
 4. precisa ser habilitado na distribuição.
+
+AWS Shield
+------------
+
+- DOS vs DDoS: basicamente a diferença é que no DOS é feito por um único elemento, enquanto o DDoS é de forma distribuída.
+- AWS Shield possui uma versão Standard e uma Advanced;
+- versão standad: proteção básica aos ataques de DDoS mais comuns;
+- versão advanced:
+1. suporte a grandes ataques 
+2. cost protection (se houver necessidade de escalar o ambiente, o custo gerado volta em forma de créditos)
+3. acesso ao time 24x7 da AWS (DRT, DDoS response team)
+4. proteção near-real-time dos ataques ocorridos
