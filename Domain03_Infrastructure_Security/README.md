@@ -74,6 +74,7 @@ AWS Shield
 
 DDoS Attacks
 -------------
+
 - DOS vs DDoS: basicamente a diferença é que no DOS é feito por um único elemento, enquanto o DDoS é de forma distribuída.
 - Mitigando um ataque DDoS:
 1. escalabilidade
@@ -81,3 +82,15 @@ DDoS Attacks
 3. monitoramento, saiba o que é normal, o que não é (cloudWatch+sns por exemplo)
 4. criação de um plano de ataque
 - serviços essenciais: shield, cloudfront, waf, route 53, elb, vpc/sg
+
+EC2 key pair troubleshooting
+-----------------------------
+
+- a key pair, uma vez que a instância é lançada, é automaticamente configurada dentro do S.O, no caso do Linux no ~/.ssh/authorized_keys, portanto se vc deletar a chave da console, mesmo assim continuará acessando a instância;
+- quando vc lança uma nova instância a partir de um AMI, a nova key pair que vc adiciona, é anexada dentro do S.O (no caso do Linux no ~/.ssh/authorized_keys), portanto essa é uma boa saída caso necessite recuperar acesso a uma instância com chave perdida;
+
+EC2 Tenancy
+------------
+- shared: as instâncias são colocadas em máquinas compartilhadas
+- dedicated instance: as instâncias são colocadas em máquinas dedicadas para uma determinada conta, porém as instâncias não são fixas, podem ser religadas em outra máquina dedicada da conta;
+- dedicated host: um host físico inteiro dedicado para a instância; persistência de host (tipicamente usado para licenciamento por exemplo)
