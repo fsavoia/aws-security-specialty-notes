@@ -50,7 +50,7 @@ CloudFront
 - SNI
 1. usado para  habilitar múltiplos certificados/domínios num mesmo servidor
 2. navegadores mais modernos suportam SNI
-3. antigamente, caso fosse necessários vários domínios/certificados no mesmo servidor, era necessário 4. alocar IPs dedicados para cada serviço para funcionamento do SSL (dns->ip->ssl por domínio)
+3. antigamente, caso fosse necessários vários domínios/certificados no mesmo servidor, era necessário alocar IPs dedicados para cada serviço para funcionamento do SSL (dns->ip->ssl por domínio)
 5. o cloudfront tem uma função bem cara ($600/mês) que habilita IPs dedicados em cada edge location para permitir funcionamento de navegadores legados (isso garante acesso total ao site)
 
 - OAI: usado para permitir acesso na origem somente pelo CloudFront, por exemplo, evitando expor um bucket S3 diretamente pro mundo; necessário habilitar o OAI, incluir uma bucket policy, bloquear acesso público.
