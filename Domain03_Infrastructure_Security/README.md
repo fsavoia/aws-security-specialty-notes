@@ -64,7 +64,6 @@ CloudFront
 AWS Shield
 ------------
 
-- DOS vs DDoS: basicamente a diferença é que no DOS é feito por um único elemento, enquanto o DDoS é de forma distribuída.
 - AWS Shield possui uma versão Standard e uma Advanced;
 - versão standad: proteção básica aos ataques de DDoS mais comuns;
 - versão advanced:
@@ -72,3 +71,13 @@ AWS Shield
 2. cost protection (se houver necessidade de escalar o ambiente, o custo gerado volta em forma de créditos)
 3. acesso ao time 24x7 da AWS (DRT, DDoS response team)
 4. proteção near-real-time dos ataques ocorridos
+
+DDoS Attacks
+-------------
+- DOS vs DDoS: basicamente a diferença é que no DOS é feito por um único elemento, enquanto o DDoS é de forma distribuída.
+- Mitigando um ataque DDoS:
+1. escalabilidade
+2. minimiza a área atacada (desacoplamento, por exemplo SQS, beanstalk)
+3. monitoramento, saiba o que é normal, o que não é (cloudWatch+sns por exemplo)
+4. criação de um plano de ataque
+- serviços essenciais: shield, cloudfront, waf, route 53, elb, vpc/sg
