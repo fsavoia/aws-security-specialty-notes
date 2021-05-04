@@ -22,8 +22,8 @@ Security Hub
 WAF
 ----
 
-- Web ACL é o conjunto geral dos rules, rules statements e associations;
-- Rule Statements: onde vc define qual regra vc quer que seja analisado durante uma requisição (ex: bloqueio acessos vindos da ìndia ; bloqueai acesso a url /admin); admite regras customizadas, bem como padrões da AWS
+- Web ACL é o conjunto geral dos rules, rules statements e associations; é nele que vc define se o pacote é rejeitado ou aceitado;
+- Rule Statements: onde vc define qual regra vc quer que seja analisado durante uma requisição (ex: bloqueio acessos vindos da Índia ; bloqueia acesso a url /admin); admite regras customizadas, bem como padrões da AWS
 - Rules (regras de ações baseadas nos statements), podem ser de 2 tipos: 
 1. regular: pode combinar vários Rule Statements e criar regras do tipo AND, OR, NOT; ex: se o request tiver um código SQL e tiver IP de origem x.x.x.x;
 2.  rate-based: regular rule + rate limiting, exemplo: se a requisição vier do IP 172.x.x.x e se a requisição exceder 1000 requests em 10 minutos;

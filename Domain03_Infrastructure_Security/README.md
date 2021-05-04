@@ -61,6 +61,13 @@ CloudFront
 3. Os cloudfront key pairs precisam ser gerados via root no IAM (security credentials)
 4. precisa ser habilitado na distribuição.
 
+- Lambda@Edge: dentro do Behavior, vc pode usar os "lambda function associations", da seguinte forma:
+1. viwer request: permite rodar função antes da requisição bater no Cloudfront, nesse caso vc pode manipular por exemplo autenticação ou modificação de URL, cookie, query strings, etc
+2. origin request: executado quando não encontra conteúdo em cache (cache miss), antes de bater na origem (usado por ex pra selecionar a origem automaticamente baseado no header)
+3. origin response: executado quando não encontra conteúdo em cache (cache miss), depois da resposta ser recebida pela origem, pode ser usado para modificar os response headers, interceptar e substituir os erros 4xx e 5xx a partir da origem
+4. viwer response: executado em todas as respostas feitas pela origem ou pelo cache
+
+
 AWS Shield
 ------------
 
@@ -91,6 +98,12 @@ EC2 key pair troubleshooting
 
 EC2 Tenancy
 ------------
+
 - shared: as instâncias são colocadas em máquinas compartilhadas
 - dedicated instance: as instâncias são colocadas em máquinas dedicadas para uma determinada conta, porém as instâncias não são fixas, podem ser religadas em outra máquina dedicada da conta;
 - dedicated host: um host físico inteiro dedicado para a instância; persistência de host (tipicamente usado para licenciamento por exemplo)
+
+AWS Artifact
+-------------
+
+- provém documentos de compliances, como PCI DSS, etc
