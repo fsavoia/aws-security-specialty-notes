@@ -1,0 +1,101 @@
+Policy 1:
+
+{
+    "Statement": {
+        "Effect": "Allow",
+        "Action": "*",
+        "Resource": "arn:aws:s3:::examplebucket",
+        "Resource": "arn:aws:s3:::examplebucket/*"
+    }
+}
+
+resposta: uso de duas entradas "resource" sem []
+
+Policy 2:
+
+
+{
+    "Statement": [
+        {
+            "Action": [
+                "iam:*AccessKey*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::888913816489:user/${aws:username}"
+            ]
+        }
+    ]
+}
+
+resposta: falta indicar versão, está sendo usado variável
+
+
+Policy 3:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Effect": "Allow",
+        "Action": "cloudfront:*",
+        "Resource": [
+            "arn:aws:cloudfront:*"
+        ]
+    }]
+}
+
+resposta: algo errado com o resource (correto seria usar asterisco para liberar tdo)
+
+Policy 4:
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Effect": "Allow",
+        "Action": "s3:*"
+        "Resource": [
+            "*"
+        ]
+    }]
+}
+
+resposta: faltou uma vírgula depois de "Action": "s3:*"
+
+
+Policy 5: 
+
+
+{
+      "Version": "2012-10-17",
+      "Statement": {
+         "Effect":"Allow",
+         "Action":"ec2:Describe*",
+         "Resource":"*"
+      }
+}
+{ 
+      "Statement": {
+         "Effect": "Allow",
+         "Action": "s3:*",
+         "Resource": "arn:aws:s3:::my-bucket/*"
+      }
+}
+
+resposta: faltou a separação dos Statements, correto deveria ser:
+
+{
+      "Version": "2012-10-17",
+      "Statement": [
+            {
+                "Effect":"Allow",
+                "Action":"ec2:Describe*",
+                "Resource":"*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": "arn:aws:s3:::my-bucket/*"
+            }
+        ]
+}

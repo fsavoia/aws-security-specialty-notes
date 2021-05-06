@@ -12,3 +12,21 @@ IAM
 - version element: 2012-10-17: versão mais novas, com funções mais modernas, como por exemplo variaveis {aws.username}; 2008-10-17: versão antiga
 - policy version é diferente do version element: policy version é apenas um versionamento de alterações das policies.
 - NotPrincipal element: IMPORTANTE: não é porque existe um NotPrincipal dentro de um Deny que vc automaticamente tem um Allow para esse usuário. Isso só garante a vc o não bloqueio, mas a permissão precisa ser configurada na policy do seu usuário.
+- IAM boundaries: quando um boundarie é configurado, ele não automaticamente lhe garante nenhuma permissão, ele é apenas uma régua limitando o máximo de permissão possível que ele pode ter, ou seja, vc ainda precisa estipular o identitie policy;
+
+
+SSO
+------
+
+- possível de se autenticar via CLI: aws sso login --profile account (já pre configurado com link, conta, role, região)
+- para habilitar SSO, o Organizations precisa ser habilitado;
+
+S3
+-----
+
+- qundo vc habilita versionamento no bucket, não é mais possível remover o versionamento, somente pausar;
+- cross region replication: ambos buckets precisam de versionamento habilitado;
+- object lock: WORM (write once, read many), usado para bloquear escrita/modificação num objeto após criação; no modo governance mode, alguns usuários IAM podem remover o lock, já no caso do compliance mode, ninguém pode alterar o lock; versionamento é pré-req.
+- quando a permissão é concedida no bucketname/, o acesso é a nível de bucket
+- quando a permissão é concedida no bucketname/*, o acesso é a nível de objeto
+- quando a permissão é concedidade no bucketname*, o acesso é total e em qualquer coisa que contenha bucketnameXXXXXX (cuidado com essa permissão, não recomendado)
