@@ -32,3 +32,10 @@ KMS
 # openssl rsautl -encrypt -oaep -in file.txt -out encrypted.txt -pubin -inkey mykey_pub
 # aws kms decrypt --key-id "925760b0-17aa-47be-bf6d-e8a550cd62cb" --encryption-algorithm RSAES_OAEP_SHA_1 --ciphertext-blob fileb://encrypted.txt --query Plaintext --output text | base64 -d
 ```
+
+- Outra função da chave assimétrica no kms é para fazer assinatura digital, onde vc assina (sign) com a chave privada, envia o arquivo e a chave pública para o destino, e ele verifica (verify) o conteúdo se está íntegro com a chave pública.
+
+```console
+# aws kms sign --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256 --query Signature --output text | base64 -d > sign.txt
+# aws kms verify --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signature fileb://sign.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256
+```
