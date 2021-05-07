@@ -39,3 +39,14 @@ KMS
 # aws kms sign --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256 --query Signature --output text | base64 -d > sign.txt
 # aws kms verify --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signature fileb://sign.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256
 ```
+
+- Data Key caching: feito para diminuir a quantidade de requisições por segundo feitas na api do KMS, cacheando a data key e o plaintext data key sempre que necessário, diminuindo a frequência da requisições, diminuindo assim latência por exemplo; se atentar ao tradeoff dessa operação, pois eleva um pouco o risco comparado a forma tradicional. AWS só recomenda essa função em casos muito específicos (milhares de chamadas);
+
+- Deletar CMK:
+1. remoção é irreversível;
+2. uma vez deletada, não é mais possível decriptar algo com ess CMK;
+3. aws enforce um período de espera (mínimo 7 dias, maximo 30, padrão é 30);
+4. durante esse período, nenhuma operação é permitida;
+5. para deletar, vai em key actions e em schedule kay deletion;
+6. key pode ser desabilitado ao invés de deletada caso necessário.
+7. caso seja necessário dar rollback durante o período de espera, vc pode chamar a api CancelKeyDeletion e ele irá colocar a CMK no status de disabled;
