@@ -47,6 +47,24 @@ KMS
 2. uma vez deletada, não é mais possível decriptar algo com ess CMK;
 3. aws enforce um período de espera (mínimo 7 dias, maximo 30, padrão é 30);
 4. durante esse período, nenhuma operação é permitida;
-5. para deletar, vai em key actions e em schedule kay deletion;
+5. para deletar, vai em key actions e em schedule key deletion;
 6. key pode ser desabilitado ao invés de deletada caso necessário.
 7. caso seja necessário dar rollback durante o período de espera, vc pode chamar a api CancelKeyDeletion e ele irá colocar a CMK no status de disabled;
+
+- CMK deletion e EBS: quando usamos criptografia KMS com EBS, o KMS cria uma data key, encripta com sua CMK e envia a data key encriptada para o EBS; Em seguida, quando vc atacha um EBS numa instância, o EC2 chama o KMS (api Decrypt) para decriptar a data key e o KMS envia o plaintext data key para o EC2 também; portanto, quando vc agenda a remoção do CMK, não há efeito imediato no EC2, pq o EC2 está usando o plaintext data key (na memória) e não o CMK para encriptar o volume. Mesmo removendo o CMK, o efeito é o mesmo, só irá mudar em caso de detach/attach do EBC em outra EC2.
+- Unmanageable CMK: boa prática, nunca remover o usuário IAM root do KMS policy, pois ele nunca pode ser removido, pois em caso de existe uma policy para um usuário específico, caso ele seja deletado por exemplo, o CMK fica ingerenciável;  
+- Access policy: Para controlar as permissões da CMK via IAM policy, precisa haver uma perissão full dentro da Key policy, caso contrário a permissão é somada da IAM policy + key policy. Importante: se houver uma Key policy default com acesso full do usuário root, então todas as contas poderão controlar a CMK via IAM policy.
+- KMS Grants: usado quando vc precisa ceder o uso (operação) a um usuário que não tem acesso a CMK, gerando assim um Token a partir de um usuário que tem acesso a CMK. Esse token pode ser revogado a qualquer momento. Exemplo de uso (gerando o token, usando e removendo):
+
+```console
+aws kms create-grant /
+--key-id [KEY-ID] /
+--grantee-principal [GRANTE-PRINCIPLE-ARN] /
+--operations "Encrypt"
+
+aws kms encrypt --plaintext "hello world" 
+--key-id [KEY-ID] /
+--grant-tokens [GRANT TOKEN RECEIVED]
+
+aws kms revoke-grant --key-id [KEY-ID] --grant-id [GRANT-ID-HERE]
+```
