@@ -71,4 +71,4 @@ KMS
     ```
 - kms:ViaService: limita/habilita o uso da CMK para requisições vindas de serviços específicos;
 - migrando serviços usando KMS: em outra região, crie um snapshot, copia de região, e seleciona uma nova CMK da região de destino para proteger os dados (default encryption key não pode ser usado); na mesma região, vc pode usar a mesma CMK original ou especificar uma nova caso deseje;
-- muito importante: caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decryptar todo dado antes de migrar de região.
+- **muito importante:** caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decryptar todo dado antes de migrar de região.
