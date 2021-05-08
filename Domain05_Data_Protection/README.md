@@ -46,11 +46,11 @@ KMS
 
 - Deletar CMK:
 1. remoção é irreversível;
-2. uma vez deletada, não é mais possível decriptar algo com ess CMK;
-3. aws enforce um período de espera (mínimo 7 dias, maximo 30, padrão é 30);
+2. uma vez deletada, não é mais possível decriptar algo com esse CMK;
+3. aws força um período de espera (mínimo 7 dias, máximo 30, padrão é 30);
 4. durante esse período, nenhuma operação é permitida;
 5. para deletar, vai em key actions e em schedule key deletion;
-6. key pode ser desabilitado ao invés de deletada caso necessário.
+6. key também pode ser desabilitada ao invés de deletada caso necessário.
 7. caso seja necessário dar rollback durante o período de espera, vc pode chamar a api CancelKeyDeletion e ele irá colocar a CMK no status de disabled;
 
 - CMK deletion e EBS: quando usamos criptografia KMS com EBS, o KMS cria uma data key, encripta com sua CMK e envia a data key encriptada para o EBS; Em seguida, quando vc atacha um EBS numa instância, o EC2 chama o KMS (api Decrypt) para decriptar a data key e o KMS envia o plaintext data key para o EC2 também; portanto, quando vc agenda a remoção do CMK, não há efeito imediato no EC2, pq o EC2 está usando o plaintext data key (na memória) e não o CMK para encriptar o volume. Mesmo removendo o CMK, o efeito é o mesmo, só irá mudar em caso de detach/attach do EBC em outra EC2.
