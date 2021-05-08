@@ -73,9 +73,28 @@ KMS
 - migrando serviços usando KMS: em outra região, crie um snapshot, copia de região, e seleciona uma nova CMK da região de destino para proteger os dados (default encryption key não pode ser usado); na mesma região, vc pode usar a mesma CMK original ou especificar uma nova caso deseje;
 - **muito importante:** caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decryptar todo dado antes de migrar de região.
 
-Classic Load Balancer
+Elastic Load Balancers
 -----------------------
 
-- não suporte http2 nativamente
-- ip address não é suportado como um target
-- path based routing não suportado (camada 4)
+- Classic Load Balancers:
+1. não suporta http2 nativamente
+2. ip address não é suportado como um target
+3. path based routing não suportado (camada 4)
+
+- HTTP vs TCP listeners: quando o listener usa protocolo TCP, a conexão se inicia no client e é encaminhada diretamente para o target; quando usa HTTP, a conexão é feita até o balance, o cabeçalho é modificado e é iniciado uma nova conexão até o target.
+
+DynamoDB Encryption
+----------------------
+
+- Dynamodb encryption client: se os dados salvos no Dynamodb forem sensíveis, o ideal é criptografar o dado o mais próximo possível da origem, nesse caso é possível usar o dynamodb encryption client para criptografar os dados da tabela ainda antes deles serem enviados para o Dynamodb (suporte ao KMS, HSM ou próprio sistema de criptografia).
+- Dynamodb encryption at rest: suporta SSE usando KMS (AES256)
+
+AWS Secrets Manager
+--------------------
+
+- suporte a gestão de senhas, com suporte nativo para RDS, DocumentDB, RedShift, outros bancos (ele conecta no banco e faz a gestão do acesso com todas as features automáticas); ele usa uma função lambda por trás para fazer isso (e ela precisa estar dentro da sua VPC);
+- é usar versionamento, portanto as aplicações não quebram quando as senhas são roteacionadas;
+- possível acessar as senhas via SDK;
+- as senhas podem ser automaticamente rotacionadas (default 30 dias, mas pode variar entre 1 e 365 dias);
+- suporte a IAM e resource based policies;
+- suporte replicar a secret para outra região
