@@ -11,22 +11,14 @@ HSM
 KMS
 ------
 
-- KMS é um serviço regiional, por padrão, nenhuma chamada a CMK de outra região pode ser feita;
-- suporta chaves simétricas e assimétricas;
-- não esquecer das roles para quem acesso o KMS;
-- alias da chave é obrigatório;
+- KMS é um serviço regional, por padrão, nenhuma chamada a CMK de outra região pode ser feita;
+- não esquecer das roles para quem consumir o serviço do KMS;
+- usar alias para chave é obrigatório;
 - cmk (customer master key, chave gerada pelo cliente / não gerenciada pela AWS);
 - key id: id da cmk;
 - ciphertext: objeto/arquivo criptogradado;
-- devido a limitação do tcp/ip, vc só pode criptogradar 4k com uma CMK (customer master key);
-- devio a latências ou oscilações de redes, AWS recomenda  o uso de CMK + Data Key (envelope encryption)
-- envelope encryption: o processo funciona da seguinte forma:
-1. primeiramente é feito uma chamada para o KMS (generate data key), usando o seu key-id (cmk) para criar uma data key
-2. a aws retorna a data key de 2 formas: plaintext e encrypted data key
-3. localmente vc encrypta o arquivo com o plaintext, exclui o plaintext da memória e guarda somente a data key encryptado;
-4. quando precisar descriptografar, vc chamada o kms (decrypt) para decriptografar a data key;
-5. com o plaintext data key, vc descriptografa o arquivo, exclui o plaintext da memória.
-- chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar e a chave para abrir, é a chave privada (vc deve guardar)
+- KMS suporta chaves simétricas e assimétricas;
+- chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar com alguém; a chave privada vc usava para abrir e deve guardar secretamente;
 - exemplo de como criptogradar algo com uma chave pública assimétrica gerada pelo KMS:
 
 ```console
@@ -40,6 +32,15 @@ KMS
 # aws kms sign --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256 --query Signature --output text | base64 -d > sign.txt
 # aws kms verify --key-id "64bcd1b9-0b2f-4924-89f1-91dfb000c6c6" --message fileb://demo.txt --signature fileb://sign.txt --signing-algorithm RSASSA_PKCS1_V1_5_SHA_256
 ```
+- devido a limitação do tcp/ip, vc só pode criptogradar arquivos de até 4k com uma CMK;
+- devio a latências ou oscilações de redes, AWS recomenda  o uso de CMK + Data Key (usando conceito de envelope encryption)
+
+- **Envelope Encryption**: o processo funciona da seguinte forma:
+1. primeiramente é feito uma chamada para o KMS (generate data key), usando o seu key-id (cmk) para criar uma data key
+2. a aws retorna a data key de 2 formas: plaintext e encrypted data key
+3. localmente vc encrypta o arquivo com o plaintext, exclui o plaintext da memória e guarda somente a data key encryptado;
+4. quando precisar descriptografar, vc chamada o kms (decrypt) para decriptografar a data key;
+5. com o plaintext data key, vc descriptografa o arquivo, exclui o plaintext da memória.
 
 - Data Key caching: feito para diminuir a quantidade de requisições por segundo feitas na api do KMS, cacheando a data key e o plaintext data key sempre que necessário, diminuindo a frequência da requisições, diminuindo assim latência por exemplo; se atentar ao tradeoff dessa operação, pois eleva um pouco o risco comparado a forma tradicional. AWS só recomenda essa função em casos muito específicos (milhares de chamadas);
 
