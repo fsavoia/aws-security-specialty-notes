@@ -11,6 +11,7 @@ HSM
 KMS
 ------
 
+- KMS é um serviço regiional, por padrão, nenhuma chamada a CMK de outra região pode ser feita;
 - suporta chaves simétricas e assimétricas;
 - não esquecer das roles para quem acesso o KMS;
 - alias da chave é obrigatório;
@@ -56,15 +57,18 @@ KMS
 - Access policy: Para controlar as permissões da CMK via IAM policy, precisa haver uma perissão full dentro da Key policy, caso contrário a permissão é somada da IAM policy + key policy. Importante: se houver uma Key policy default com acesso full do usuário root, então todas as contas poderão controlar a CMK via IAM policy.
 - KMS Grants: usado quando vc precisa ceder o uso (operação) a um usuário que não tem acesso a CMK, gerando assim um Token a partir de um usuário que tem acesso a CMK. Esse token pode ser revogado a qualquer momento. Exemplo de uso (gerando o token, usando e removendo):
 
-```console
-aws kms create-grant /
---key-id [KEY-ID] /
---grantee-principal [GRANTE-PRINCIPLE-ARN] /
---operations "Encrypt"
+    ```console
+    aws kms create-grant /
+    --key-id [KEY-ID] /
+    --grantee-principal [GRANTE-PRINCIPLE-ARN] /
+    --operations "Encrypt"
 
-aws kms encrypt --plaintext "hello world" 
---key-id [KEY-ID] /
---grant-tokens [GRANT TOKEN RECEIVED]
+    aws kms encrypt --plaintext "hello world" 
+    --key-id [KEY-ID] /
+    --grant-tokens [GRANT TOKEN RECEIVED]
 
-aws kms revoke-grant --key-id [KEY-ID] --grant-id [GRANT-ID-HERE]
-```
+    aws kms revoke-grant --key-id [KEY-ID] --grant-id [GRANT-ID-HERE]
+    ```
+- kms:ViaService: limita/habilita o uso da CMK para requisições vindas de serviços específicos;
+- migrando serviços usando KMS: em outra região, crie um snapshot, copia de região, e seleciona uma nova CMK da região de destino para proteger os dados (default encryption key não pode ser usado); na mesma região, vc pode usar a mesma CMK original ou especificar uma nova caso deseje;
+- muito importante: caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decryptar todo dado antes de migrar de região.
