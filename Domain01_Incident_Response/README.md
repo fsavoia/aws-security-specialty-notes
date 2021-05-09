@@ -13,6 +13,7 @@ Exemplo: ec2 sendo usados para minerar bitcoins / ec2 sofrendo tentativas de bru
 - Os Findings types suportados estão na documentação da AWS para análise: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html;
 - Os findings podem ser arquivados ou filtrados (supress).
 - Central Architecture: É possível enviar os Findings de todos os member account para uma master aws account.
+- In AD environment, the DNS Resolver is generally set to that of the AD server. Since customer DNS resolver is used, Guard Duty will not be able to see the DNS request.
 
 Incident Response
 ------------------
