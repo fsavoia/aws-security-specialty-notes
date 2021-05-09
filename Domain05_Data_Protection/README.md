@@ -17,6 +17,7 @@ KMS
 - cmk (customer master key, chave gerada pelo cliente / não gerenciada pela AWS);
 - key id: id da cmk;
 - ciphertext: objeto/arquivo criptografado;
+- quando é criada uma CMK usando imported key material, não é possível habilitar a rotação automática anual do KMS;
 - KMS suporta chaves simétricas e assimétricas;
 - chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar com alguém; a chave privada vc usava para abrir e deve guardar secretamente;
 - exemplo de como criptografar algo com uma chave pública assimétrica gerada pelo KMS:
