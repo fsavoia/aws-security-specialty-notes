@@ -11,7 +11,7 @@ Exemplo: ec2 sendo usados para minerar bitcoins / ec2 sofrendo tentativas de bru
 - Trusted IP List: possível customizar algum ip/rede para o guarduty não gerar os findings ; possível extrair localmente ou de uma lista vinda de um bucket. Suporta alguns formatos (plaintext / csv, por exemplo)
 - Threat lists: oposto do Trusted IP List, IPs maliciosos conhecidos, são gerados findings para todas as requisições vinda deles.
 - Os Findings types suportados estão na documentação da AWS para análise: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html;
-- Os findings podem ser arquivos ou filtrados (supress).
+- Os findings podem ser arquivados ou filtrados (supress).
 - Central Architecture: É possível enviar os Findings de todos os member account para uma master aws account.
 
 Incident Response
@@ -26,8 +26,10 @@ Incident Response
 4. cria uma nova credencial e migra;
 5. valida seu conta (cloudtrail, recursos, etc), para identificar se algo pode ter acontecido.
 
+- Para evitar que uma credencial roubada seja usada num EC2, é necessário editar o arquivo ~/.ssh/authorized_keys e remover a entrada da chave pública (não adianta remover a key da console)
+
 - EC2 comprometido:
-1. isola a instância, só permite acesso se for para análise forense ou algo do tipo;
+1. isola a instância, só permite acesso se for para análise forense ou algo do tipo (remova regra de acesso via SG por exemplo);
 2. tira um snapshot do EBS;
 3. tira um dump de memória para análise forese poterior (caso o ofensor esteja rodando em memória);
 4. análise forense / causa raíz;
