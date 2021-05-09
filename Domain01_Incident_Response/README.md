@@ -8,6 +8,7 @@ Guarduty
 
 - Monitora logs de serviço (monitoração inteligente) para buscar riscos de segurança (cloudtrail/vpc flow logs, dns logs / não monitora outros logs)
 Exemplo: ec2 sendo usados para minerar bitcoins / ec2 sofrendo tentativas de bruteforce / portscan, etc
+- Capaz de identificar quando desabilitam o CloudTrail na conta;
 - Trusted IP List: possível customizar algum ip/rede para o guarduty não gerar os findings ; possível extrair localmente ou de uma lista vinda de um bucket. Suporta alguns formatos (plaintext / csv, por exemplo)
 - Threat lists: oposto do Trusted IP List, IPs maliciosos conhecidos, são gerados findings para todas as requisições vinda deles.
 - Os Findings types suportados estão na documentação da AWS para análise: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html;
