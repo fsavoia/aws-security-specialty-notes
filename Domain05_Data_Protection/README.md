@@ -16,10 +16,10 @@ KMS
 - usar alias para chave é obrigatório;
 - cmk (customer master key, chave gerada pelo cliente / não gerenciada pela AWS);
 - key id: id da cmk;
-- ciphertext: objeto/arquivo criptogradado;
+- ciphertext: objeto/arquivo criptografado;
 - KMS suporta chaves simétricas e assimétricas;
 - chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar com alguém; a chave privada vc usava para abrir e deve guardar secretamente;
-- exemplo de como criptogradar algo com uma chave pública assimétrica gerada pelo KMS:
+- exemplo de como criptografar algo com uma chave pública assimétrica gerada pelo KMS:
 
 ```console
 # openssl rsautl -encrypt -oaep -in file.txt -out encrypted.txt -pubin -inkey mykey_pub
@@ -38,7 +38,7 @@ KMS
 - **Envelope Encryption**: o processo funciona da seguinte forma:
 1. primeiramente é feito uma chamada para o KMS (generate data key), usando o seu key-id (cmk) para criar uma data key
 2. a aws retorna a data key de 2 formas: plaintext e encrypted data key
-3. localmente vc encrypta o arquivo com o plaintext, exclui o plaintext da memória e guarda somente a data key encryptado;
+3. localmente vc encripta o arquivo com o plaintext, exclui o plaintext da memória e guarda somente a data key encriptado;
 4. quando precisar descriptografar, vc chamada o kms (decrypt) para decriptografar a data key;
 5. com o plaintext data key, vc descriptografa o arquivo, exclui o plaintext da memória.
 
@@ -72,7 +72,7 @@ KMS
     ```
 - kms:ViaService: limita/habilita o uso da CMK para requisições vindas de serviços específicos;
 - migrando serviços usando KMS: em outra região, crie um snapshot, copia de região, e seleciona uma nova CMK da região de destino para proteger os dados (default encryption key não pode ser usado); na mesma região, vc pode usar a mesma CMK original ou especificar uma nova caso deseje;
-- **muito importante:** caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decryptar todo dado antes de migrar de região.
+- **muito importante:** caso esteja usando envelope encryption, usando data-keys, é necessário primeiro decriptar todo dado antes de migrar de região.
 
 - KMS encryption context: In addition to limiting permission to the AWS KMS APIs, AWS KMS also gives you the ability to add an additional layer of authentication for your KMS API calls utilizing encryption context. The encryption context is a key-value pair of additional data that you want associated with AWS KMS-protected information. This is then incorporated into the additional authenticated data (AAD) of the authenticated encryption in AWS KMS-encrypted ciphertexts. If you submit the encryption context value in the encryption operation, you are required to pass it in the corresponding decryption operation. You can use the encryption context inside your policies to enforce tighter controls for your encrypted resources. Because the encryption context is logged in CloudTrail, you can get more insight into the usage of your keys from an audit perspective. Be aware that the encryption context is not encrypted and will be visible within CloudTrail logs. The encryption context should not be considered sensitive information and should not require secrecy.
 
