@@ -26,7 +26,8 @@ S3
 
 - qundo vc habilita versionamento no bucket, não é mais possível remover o versionamento, somente pausar;
 - cross region replication: ambos buckets precisam de versionamento habilitado;
-- object lock: WORM (write once, read many), usado para bloquear escrita/modificação num objeto após criação; no modo governance mode, alguns usuários IAM podem remover o lock, já no caso do compliance mode, ninguém pode alterar o lock; versionamento é pré-req.
-- quando a permissão é concedida no bucketname/, o acesso é a nível de bucket
-- quando a permissão é concedida no bucketname/*, o acesso é a nível de objeto
-- quando a permissão é concedidade no bucketname*, o acesso é total e em qualquer coisa que contenha bucketnameXXXXXX (cuidado com essa permissão, não recomendado)
+- object lock: WORM (write once, read many), usado para bloquear escrita/modificação num objeto após criação; no modo governance mode, alguns usuários IAM podem remover o lock, já no caso do compliance mode, ninguém pode alterar o lock; versionamento é pré-req;
+- quando a permissão é concedida no bucketname/, o acesso é a nível de bucket;
+- quando a permissão é concedida no bucketname/*, o acesso é a nível de objeto;
+- quando a permissão é concedidade no bucketname*, o acesso é total e em qualquer coisa que contenha bucketnameXXXXXX (cuidado com essa permissão, não recomendado);
+- quando houver necessidade de criptografia em transito (SSL), pode ser usado uma bucket policy negando quando houver aws:SecureTransport:false.
