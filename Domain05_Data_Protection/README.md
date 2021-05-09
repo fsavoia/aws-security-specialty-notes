@@ -18,6 +18,7 @@ KMS
 - key id: id da cmk;
 - ciphertext: objeto/arquivo criptografado;
 - quando é criada uma CMK usando imported key material, não é possível habilitar a rotação automática anual do KMS;
+- quando se usa rotação automática anual do KMS, nenhuma ação manual é necessária, todos os novos dados serão encriptados com a nova CMK e os dados antigos serão descriptografados pela chave anterior salva/backupeada;
 - KMS suporta chaves simétricas e assimétricas;
 - chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar com alguém; a chave privada vc usava para abrir e deve guardar secretamente;
 - exemplo de como criptografar algo com uma chave pública assimétrica gerada pelo KMS:
