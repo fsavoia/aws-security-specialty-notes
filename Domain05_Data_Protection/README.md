@@ -19,6 +19,8 @@ KMS
 - ciphertext: objeto/arquivo criptografado;
 - quando é criada uma CMK usando imported key material, não é possível habilitar a rotação automática anual do KMS;
 - quando se usa rotação automática anual do KMS, nenhuma ação manual é necessária, todos os novos dados serão encriptados com a nova CMK e os dados antigos serão descriptografados pela chave anterior salva/backupeada;
+- As AWS Managed CMK possuem rotação automática habilitadas pela AWS de 3 anos (1095 dias);
+- As chaves assimétricas, as chaves hospedadas em uma custom key store (HSM por exemplo) e as chaves geradas com material importado, **não possuem opção para rotação automática**, somente manual se necessário;
 - KMS suporta chaves simétricas e assimétricas;
 - chave assimétrica: usado o método chave pública / privada. imagine um chaveiro/chave: o chaveiro é a chave pública, onde vc pode compartilhar com alguém; a chave privada vc usava para abrir e deve guardar secretamente;
 - exemplo de como criptografar algo com uma chave pública assimétrica gerada pelo KMS:

@@ -61,11 +61,14 @@ CloudFront
 3. Os cloudfront key pairs precisam ser gerados via root no IAM (security credentials)
 4. precisa ser habilitado na distribuição.
 
-- Lambda@Edge: dentro do Behavior, vc pode usar os "lambda function associations", da seguinte forma:
+- Lambda@Edge is a feature of Amazon CloudFront that lets you run code closer to users of your application, which improves performance and reduces latency. With Lambda@Edge, you don’t have to provision or manage infrastructure in multiple locations around the world. You pay only for the compute time you consume – there is no charge when your code is not running. Dentro do Behavior, vc pode usar os "lambda function associations", da seguinte forma:
 1. viwer request: permite rodar função antes da requisição bater no Cloudfront, nesse caso vc pode manipular por exemplo autenticação ou modificação de URL, cookie, query strings, etc
 2. origin request: executado quando não encontra conteúdo em cache (cache miss), antes de bater na origem (usado por ex pra selecionar a origem automaticamente baseado no header)
 3. origin response: executado quando não encontra conteúdo em cache (cache miss), depois da resposta ser recebida pela origem, pode ser usado para modificar os response headers, interceptar e substituir os erros 4xx e 5xx a partir da origem
 4. viwer response: executado em todas as respostas feitas pela origem ou pelo cache
+
+- If you want to require HTTPS between viewers and CloudFront, you must change the AWS region to US East (N. Virginia) in the AWS Certificate Manager console before you request or import a certificate.
+- If you want to require HTTPS between CloudFront and your origin, and you’re using an ELB load balancer as your origin, you can request or import a certificate in any region.
 
 
 AWS Shield

@@ -13,6 +13,7 @@ IAM
 - policy version é diferente do version element: policy version é apenas um versionamento de alterações das policies.
 - NotPrincipal element: IMPORTANTE: não é porque existe um NotPrincipal dentro de um Deny que vc automaticamente tem um Allow para esse usuário. Isso só garante a vc o não bloqueio, mas a permissão precisa ser configurada na policy do seu usuário.
 - IAM boundaries: quando um boundarie é configurado, ele não automaticamente lhe garante nenhuma permissão, ele é apenas uma régua limitando o máximo de permissão possível que ele pode ter, ou seja, vc ainda precisa estipular o identitie policy;
+- IAM database authentication: dá pra se autenticar via IAM no MySQL e PostgreSQL; ele possui suporte a usar um token ao invés de uma senha; toda comunicação de autenticação é criptografada via SSL; permite gerenciar centralmente via IAM ao invés de conectar nos bancos individualmente; para aplicações rodando em EC2, dá para usar um profile credentials ao invés de usar senhas.
 
 
 SSO
