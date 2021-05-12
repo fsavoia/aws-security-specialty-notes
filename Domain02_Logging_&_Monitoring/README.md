@@ -60,6 +60,7 @@ CloudTrail
 - possível criar trails (um é de graça), onde vc joga os logs para o S3, possível habilitar para todas as contas de um Organizations;
 - possui integração com cloudwatch para monitorar os trails e notificar quando algo acontece;
 - no Event history só é possível visualizar os últimos 90 dias de logs, mais do que isso é necessário criar um trail e jogar para o S3.
+- tambem é possível criar uma trail e jogar os logs para o cloudwatch (além do S3), e usar Cloudwatch queries para buscar logs;
 - Log file integrity: usado para garantir a integridade dos logs do trail, evitando assim que alguém manipule o arquivo de log. Ele faz isso usando hash e assinatura digital
 - To deliver log files to an S3 bucket, CloudTrail must have the required permissions, and it cannot be configured as a Requester Pays bucket. CloudTrail automatically attaches the required permissions to a bucket when you create an Amazon S3 bucket as part of creating or updating a trail in the CloudTrail console.
 - Management events: vc faz um controle fino do que vai ser gerado no Cloudtrail. Por exemplo, eu quero que seja gerado somente log que modifica os recursos do meu ambiente, por exemplo EC2TerminateInstance, ou somente log que faz leitura de recursos, exemplo EC2DescribeInstances. Por isso, é necessário escolher entre read-only, write-only, all, etc.
