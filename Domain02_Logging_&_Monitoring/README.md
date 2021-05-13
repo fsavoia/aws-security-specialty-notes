@@ -80,6 +80,7 @@ AWS Config
 - por muitas vezes uma rule (aws managed) vem de um conformance pack.
 - para habilitar que ele monitore todas as regiões, é necessário habilitar global resource check durante a configuração (The global resource types that AWS Config supports are IAM users, groups, roles, and customer managed policie)
 - AWS config best practices: https://aws.amazon.com/blogs/mt/aws-config-best-practices/
+- possível usar o CloudWatch Events para monitorar as triggers do Config e com isso, invocar uma ação, um lambda por exemplo para tomar alguma ação. Ex.: uma VPC sem Flow Log habilitado, cria uma Rule no AWS Config que faz o track, o CW Events faz o trigger e chama um lambda para habilitar;
 
 Trusted Advisor
 ----------------
