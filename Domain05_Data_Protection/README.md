@@ -89,6 +89,7 @@ Elastic Load Balancers
 1. não suporta http2 nativamente
 2. ip address não é suportado como um target
 3. path based routing não suportado (camada 4)
+4. não suporte SNI (se quiser, integra com CloudFront e habilita nele)
 
 - HTTP vs TCP listeners: quando o listener usa protocolo TCP, a conexão se inicia no client e é encaminhada diretamente para o target; quando usa HTTP, a conexão é feita até o balance, o cabeçalho é modificado e é iniciado uma nova conexão até o target.
 
