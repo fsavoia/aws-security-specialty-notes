@@ -80,6 +80,7 @@ KMS
 
 - KMS encryption context: In addition to limiting permission to the AWS KMS APIs, AWS KMS also gives you the ability to add an additional layer of authentication for your KMS API calls utilizing encryption context. The encryption context is a key-value pair of additional data that you want associated with AWS KMS-protected information. This is then incorporated into the additional authenticated data (AAD) of the authenticated encryption in AWS KMS-encrypted ciphertexts. If you submit the encryption context value in the encryption operation, you are required to pass it in the corresponding decryption operation. You can use the encryption context inside your policies to enforce tighter controls for your encrypted resources. Because the encryption context is logged in CloudTrail, you can get more insight into the usage of your keys from an audit perspective. Be aware that the encryption context is not encrypted and will be visible within CloudTrail logs. The encryption context should not be considered sensitive information and should not require secrecy.
 
+- GenerateDataKeyWithoutPlainText: usado para gerar somente a data key, sem o plain text data, útil quando vc precisa descriptografar posteriormente. Ai nesse caso, vc usa o Decrypt em cima da data key para ai sim gerar o plain text data key para criptografar posteriormente.
 
 Elastic Load Balancers
 -----------------------
